@@ -10,6 +10,9 @@
     --text-color : #323738;
     --text-cta : #F8F8FF;
     --text-link : #1C552C; /* R with Primary : 8.35, Secondary : 7.96, Tertiary : 6.59 */
+    /* ---------- */
+
+    --fast-trans : .3s ease-in-out;
 }
 
 @font-face {
@@ -68,6 +71,7 @@ header {
     height: 25rem;
     justify-content: end;
     align-items: center;
+    overflow: hidden;
 }
 
 .hero-title {
@@ -81,32 +85,116 @@ header {
 nav {
     display: flex;
     justify-content: center;
-    padding: 1rem;
     background-color: var(--bg-tertiary);
 
     & ul {
         display: flex;
         list-style: none;
         justify-content: space-around;
-        width: min(800px, 80%);
+        width: min(800px, 100%);
+        overflow: hidden;
+        height: auto;
     }
 
     & a {
+        display: flex;
+        height: 100%;
         color: var(--text-link);
         text-decoration: none;
         text-transform: uppercase;
         font-weight: 700;
-        padding: .5rem;
+        padding: 1rem;
         border: 2px solid transparent;
+        transition: background-color var(--fast-trans), color var(--fast-trans);
+    }
+
+    & .burger-menu, .inactive, .responsive-navigation {
+        display: none;
+        padding: 1rem;
+    }
+}
+
+.burger-menu {
+    & svg {
+        border : 2px solid var(--text-color);
+        border-radius: 6px;
+        cursor: pointer;
     }
 }
 
 /* Animations */
 
+@keyframes upAndDown {
+    0%, 100% {
+        transform: translateY(0px);
+    }
+
+    33% {
+        transform: translateY(3px);
+    }
+
+    66% {
+        transform: translateY(-3px);
+    }
+}
+
+@keyframes topToDown {
+    0% {
+        transform: translateX(-500px);
+        height: 0px;
+        opacity: 0;
+    }
+
+    100% {
+        transform: translateX(0px);
+        height: 305px;
+        opacity: 1;
+    }
+}
+
+@keyframes downToTop {
+    0% {
+        transform: translateX(0px);
+        height: 305px;
+        opacity: 1;
+    }
+
+    20% {
+        transform: translateX(-100px);
+        height: 305px;
+        opacity: 1;
+    }
+
+    100% {
+        transform: translateX(-500px);
+        height: 0px;
+        opacity: 0;
+    }
+}
+
 /* State */
 
 nav a:hover, nav a:focus {
-    border-color: var(--text-link);
+    background-color: var(--text-link);
+    color: var(--text-cta);
+}
+
+*:focus {
+    border: 2px solid var(--text-cta);
+    box-shadow: 0 0 2px 3px var(--cta-bg);
+}
+
+.burger-menu:focus {
+    box-shadow: none;
+}
+
+.burger-menu:hover > svg {
+    animation: upAndDown 1s ease-out infinite;
+}
+
+.burger-menu:focus > svg {
+    border: 2px solid var(--text-cta);
+    box-shadow: 0 0 2px 3px var(--cta-bg);
 }
 
 /* Responsive */
@@ -115,6 +203,60 @@ nav a:hover, nav a:focus {
         height: 22rem;
         justify-content: center;
         align-items: start;
+    }
+
+    nav {
+        & a {
+            font-weight: 600;
+        }
+    }
+}
+
+/*
+/!\ Below ! /!\
+Important break point for the navigation, transforming in a basic mobile navigation via hamburger menu & some animations too smooth it up.
+*/
+
+@media screen and (max-width: 720px) {
+    nav {
+
+        flex-direction: column;
+
+        & #primary-navigation {
+            animation: downToTop 1s ease-out forwards;            
+            display: none;
+        }
+
+        & #primary-navigation.active {
+            display: flex;
+            flex-direction: column;
+            animation: topToDown 1s ease-out forwards;
+        }
+
+        & #primary-navigation.closed {
+            display: flex;
+            flex-direction: column;
+            animation: downToTop 1s ease-out forwards;
+        }
+
+        & .burger-menu {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background-color: var(--bg-tertiary);
+            border: none;
+        }
+
+        & .burger-menu > svg {
+            width: 2rem;
+            height: 2rem;
+        }
+        
+        & .inactive {
+            display: none;
+        }
+
     }
 }
 
