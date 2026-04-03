@@ -114,6 +114,53 @@ nav {
     }
 }
 
+section:nth-of-type(2n) {
+    background-color: var(--bg-secondary);
+}
+
+section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 1rem;
+}
+
+section > h2, section > h3 {
+    padding: 2rem 0;
+    text-decoration: underline 2px var(--cta-bg);
+    text-underline-offset: 1rem;
+    line-height: 3rem;
+}
+
+section span {
+    margin: 1.25rem 0;
+    padding: 1rem;
+    background-color: var(--cta-bg);
+    color: var(--text-cta);
+    border-radius: 6px;
+    box-shadow: 0 0 8px 0px var(--text-color);
+    text-transform: uppercase;
+    font-weight: 600;
+}
+
+section em {
+    font-style: normal;
+    font-weight: 800;
+    color: var(--text-link);
+}
+
+section cite {
+    font-weight: 500;
+    padding-bottom: 3rem;
+}
+
+p {
+    width: min(65ch, 100%);
+    text-align: justify;
+    padding: 2rem 1rem;
+}
+
 .burger-menu {
     & svg {
         border : 2px solid var(--text-color);
