@@ -230,6 +230,7 @@ footer {
     grid-template-columns: 1fr 1fr;
     flex-wrap: wrap;
     gap: 1rem;
+    padding: 1.5rem;
 }
 
 footer section, footer section:nth-of-type(2n) {
@@ -239,8 +240,20 @@ footer section, footer section:nth-of-type(2n) {
 }
 
 footer section h2, footer section h3 {
-    padding: .5rem 0;
+    padding: 0 0;
     text-decoration: none;
+}
+
+footer section h2 {
+    font-size: 22px;
+}
+
+footer section h3 {
+    font-size: 20px;
+}
+
+footer section {
+    font-size: 18px;
 }
 
 footer li {
@@ -251,6 +264,58 @@ footer li {
 footer a {
     color: var(--text-link);
     font-weight: 500;
+}
+
+/*-------------
+Page : A propos
+-------------*/
+
+.team article {
+    padding: 3rem 0rem;
+    display: grid;
+    justify-items: center;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 2rem;
+}
+
+.team-cards {
+    display: grid;
+    grid-template-areas: 
+    "header"
+    "title"
+    "par"
+    "cite";
+    grid-template-rows: 250px 50px 280px 200px;
+    justify-items: center;
+    background-color: var(--bg-secondary);
+    padding: 2rem 1rem;
+    border-radius: 8px;
+    width: 350px;
+    height: 750px;
+    overflow: hidden;
+    box-shadow: 0px 0px 5px 1px var(--cta-bg);
+}
+
+.team-cards h3 {
+    grid-area: title;
+    border-bottom: 3px solid var(--cta-bg);
+    width: 100%;
+}
+
+.team-cards img {
+    grid-area: header;
+    width: 220px;
+    height: 220px;
+    border-radius: 50%;
+}
+
+.team-cards p {
+    grid-area: par;
+    align-self: center;
+}
+
+.team-cards cite {
+    grid-area: cite;
 }
 
 /* Animations */
@@ -349,6 +414,17 @@ nav a:hover, nav a:focus {
 
 }
 
+@media screen and (max-width: 1350px) {
+    .team article {
+        grid-template-columns: 300px 300px;
+        justify-content: center;
+    }
+
+    .team-cards {
+        width: 290px;
+    }
+}
+
 @media screen and (max-width: 920px) {
     header {
         height: 22rem;
@@ -430,6 +506,22 @@ Important break point for the navigation, transforming in a basic mobile navigat
     
     footer {
         grid-template-columns: 1fr;
+    }
+
+    footer section h2 {
+        font-size: 20px;
+    }
+
+    footer section h3 {
+        font-size: 18px;
+    }
+
+    footer section {
+        font-size: 16px;
+    }
+
+    .team article {
+        grid-template-columns: 300px;
     }
 }
 
